@@ -9875,10 +9875,12 @@ o=A.aa(a.h(0,"type"))
 n=t.Xw.a(a.h(0,"payload"))
 if(n==null)n=B.bji
 return new A.fV(s,q,p,r,o,A.di(n,t.N,t.z),A.hl(A.aa(a.h(0,"created_at"))))},
-bUI(a){if(B.br9.n(0,a))return"members"
+bUI(a){var s="development"
+if(B.br9.n(0,a))return"members"
+if(a==="idea_tasks_added")return s
 if(B.p.cf(a,"idea_"))return"ideas"
 if(B.p.cf(a,"training_"))return"training"
-return"development"},
+return s},
 bAc(a){var s
 A:{if("members"===a){s="\xdcyeler"
 break A}if("ideas"===a){s="Fikirler"
@@ -67384,24 +67386,27 @@ bdY(){return this.aqI(null)}}
 A.fV.prototype={
 ganq(){var s=this.r
 return B.p.kg(s,"_deleted")||s==="member_removed"||s==="github_rollback"},
-geh(){var s,r,q,p,o,n,m,l,k,j=this,i="Biri",h="name",g="title",f="decision"
+geh(){var s,r,q,p,o,n,m,l,k,j=this,i="Biri",h="name",g="added_by",f="title",e="decision"
 switch(j.r){case"group_created":s=j.d
 if(s==null)s=i
 return s+' "'+A.k(j.w.h(0,h))+'" grubunu kurdu'
-case"member_joined":s=j.d
-return(s==null?i:s)+" gruba kat\u0131ld\u0131"
+case"member_joined":s=j.w
+r=j.d
+if(s.h(0,g)!=null){if(r==null)r=i
+s=r+" projeye atand\u0131 ("+A.k(s.h(0,g))+")"}else s=(r==null?i:r)+" projeye kat\u0131ld\u0131"
+return s
 case"project_created":s=j.d
 if(s==null)s=i
 return s+' "'+A.k(j.w.h(0,h))+'" projesini a\xe7t\u0131'
 case"task_created":s=j.d
 if(s==null)s=i
-return s+' "'+A.k(j.w.h(0,g))+'" g\xf6revini ekledi'
+return s+' "'+A.k(j.w.h(0,f))+'" g\xf6revini ekledi'
 case"task_status":s=j.w
 r=A.a0(s.h(0,"status"))
 q=A.afx(r==null?"":r).toLowerCase()
 r=j.d
-if(r==null)s='"'+A.k(s.h(0,g))+'" g\xf6revi '+q+" oldu"
-else s=r+' "'+A.k(s.h(0,g))+'" g\xf6revini '+q+" yapt\u0131"
+if(r==null)s='"'+A.k(s.h(0,f))+'" g\xf6revi '+q+" oldu"
+else s=r+' "'+A.k(s.h(0,f))+'" g\xf6revini '+q+" yapt\u0131"
 return s
 case"release_created":return A.k(j.w.h(0,"version"))+" s\xfcr\xfcm\xfc yay\u0131nland\u0131"
 case"project_imported":s=j.d
@@ -67424,7 +67429,7 @@ break A}if("merged"===m){r="birle\u015ftirdi"
 break A}if("closed"===m){r="kapatt\u0131"
 break A}if("reopened"===m){r="yeniden a\xe7t\u0131"
 break A}r="g\xfcncelledi"
-break A}return A.k(s.h(0,"author"))+" #"+A.k(s.h(0,"number"))+' "'+A.k(s.h(0,g))+"\" PR'\u0131n\u0131 "+r
+break A}return A.k(s.h(0,"author"))+" #"+A.k(s.h(0,"number"))+' "'+A.k(s.h(0,f))+"\" PR'\u0131n\u0131 "+r
 case"github_issue_closed":s=j.w
 p=s.h(0,"closed_tasks")
 if(p==null)p=0
@@ -67442,10 +67447,10 @@ if(s==null)s=i
 return s+" "+A.k(j.w.h(0,"repo"))+" reposunu olu\u015fturdu"
 case"task_deleted":s=j.d
 if(s==null)s=i
-return s+' "'+A.k(j.w.h(0,g))+'" g\xf6revini sildi'
+return s+' "'+A.k(j.w.h(0,f))+'" g\xf6revini sildi'
 case"milestone_deleted":s=j.d
 if(s==null)s=i
-return s+' "'+A.k(j.w.h(0,g))+'" a\u015famas\u0131n\u0131 sildi'
+return s+' "'+A.k(j.w.h(0,f))+'" a\u015famas\u0131n\u0131 sildi'
 case"release_deleted":s=j.d
 if(s==null)s=i
 return s+" "+A.k(j.w.h(0,"version"))+" s\xfcr\xfcm\xfcn\xfc sildi"
@@ -67458,8 +67463,8 @@ r=j.w
 return s+' "'+A.k(r.h(0,h))+'" projesini sildi (%'+A.k(r.h(0,"progress"))+" idi)"
 case"member_removed":s=j.d
 if(s==null)s=i
-return s+" "+A.k(j.w.h(0,h))+" adl\u0131 \xfcyeyi gruptan \xe7\u0131kard\u0131"
-case"member_left":return A.k(j.w.h(0,h))+" gruptan ayr\u0131ld\u0131"
+return s+" "+A.k(j.w.h(0,h))+" adl\u0131 \xfcyeyi projeden \xe7\u0131kard\u0131"
+case"member_left":return A.k(j.w.h(0,h))+" projeden ayr\u0131ld\u0131"
 case"repo_linked":return'"'+A.k(j.w.h(0,h))+'" projesi GitHub reposuna ba\u011fland\u0131'
 case"idea_tasks_added":s=j.d
 if(s==null)s=i
@@ -67469,8 +67474,8 @@ case"user_joined":return A.k(j.w.h(0,h))+" Ekip Panel'e kat\u0131ld\u0131"
 case"note_added":s=j.d
 if(s==null)s=i
 r=j.w
-l=A.k(r.h(0,g))
-r=J.d(r.h(0,"kind"),f)?"karar\u0131n\u0131":"notunu"
+l=A.k(r.h(0,f))
+r=J.d(r.h(0,"kind"),e)?"karar\u0131n\u0131":"notunu"
 return s+' g\xfcnl\xfc\u011fe "'+l+'" '+r+" ekledi"
 case"role_changed":s=j.d
 if(s==null)s=i
@@ -67480,7 +67485,7 @@ r=A.a0(r.h(0,"to"))
 return s+" "+l+" adl\u0131 \xfcyeyi "+A.p1(r==null?"":r)+" yapt\u0131"
 case"training_added":s=j.d
 if(s==null)s=i
-return s+' "'+A.k(j.w.h(0,g))+'" e\u011fitim konusunu a\xe7t\u0131'
+return s+' "'+A.k(j.w.h(0,f))+'" e\u011fitim konusunu a\xe7t\u0131'
 case"training_doc_added":s=j.w
 k=s.h(0,"kind")
 B:{if("link"===k){r="ba\u011flant\u0131s\u0131n\u0131"
@@ -67488,15 +67493,15 @@ break B}if("note"===k){r="notunu"
 break B}r="PDF'ini"
 break B}l=j.d
 if(l==null)l=i
-return l+' "'+A.k(s.h(0,"topic"))+'" e\u011fitimine "'+A.k(s.h(0,g))+'" '+r+" ekledi"
+return l+' "'+A.k(s.h(0,"topic"))+'" e\u011fitimine "'+A.k(s.h(0,f))+'" '+r+" ekledi"
 case"idea_created":s=j.d
 if(s==null)s=i
-return s+' "'+A.k(j.w.h(0,g))+'" fikrini a\xe7t\u0131'
+return s+' "'+A.k(j.w.h(0,f))+'" fikrini a\xe7t\u0131'
 case"idea_decided":s=j.d
 if(s==null)s=i
 r=j.w
-l=A.k(r.h(0,g))
-r=r.h(0,f)!=null?": "+A.k(r.h(0,f)):""
+l=A.k(r.h(0,f))
+r=r.h(0,e)!=null?": "+A.k(r.h(0,e)):""
 return s+' "'+l+'" fikrini karara ba\u011flad\u0131'+r
 default:s=j.d
 return(s==null?i:s)+" bir i\u015flem yapt\u0131"}},
